@@ -1,42 +1,61 @@
 import React from "react";
-import { StyleSheet, View} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
+import { SliderBox } from "react-native-image-slider-box";
 
-const Home = () => {
+const Home = ({navigation}) => {
+
   return (
+    <ScrollView>
     <View style={[styles.container, {
       // Try setting `flexDirection` to `"row"`.
-      flexDirection: "column"
+      flexDirection: "row"
     }]}>
-      <View style={styles.redbox}> 
-      </View> 
-      <View style={styles.orangebox} />
-      <View style={styles.bluebox} />
+      <View style={{ flex: 1, alignItems: 'center',}}>
+       <Text style={{fontSize: 20, fontWeight: 'bold'}}>Bem vindo, "Nome"</Text>
+       <View style={{alignItems: 'flex-start'}}>
+       <Image style={styles.imagens}
+       source={require('./../../../imagens/procurando.jpg')}
+       />
+       <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black', paddingTop: 20, textAlign: 'center'}}>Sugestões de Serviços disponiveis:</Text>
+      </View>
+      </View>
+      <View style={{ flex: 1, alignItems: 'center'}}>
+        <Text style={styles.texto2}>Procurando serviços disponiveis para serem contratados?</Text>
     </View>
+    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#0037A8'
-
+    padding: 10,
   },
-  redbox: {
-    flex: 1, 
-    backgroundColor: "red",
-    flex: 1, alignItems: "center", justifyContent: "center"
+  imagens:{
+    marginTop: 25,
+    width: 195,
+    height: 150,
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: 'center',
   },
-  orangebox: {
-    flex: 1, 
-    backgroundColor: "darkorange",
-    flex: 1, alignItems: "center", justifyContent: "center"
+  texto:{
+    fontSize: 23, 
+    fontWeight: 'bold',
+    color: '#0e47e6',
+    textAlign: 'center',
+    alignItems: 'center',
+    paddingTop: 21,
+    paddingLeft: 30
   },
-  bluebox: {
-    flex: 1, 
-    backgroundColor: "blue",
-    flex: 1, alignItems: "center", justifyContent: "center"
-  }
+  texto2:{
+    fontSize: 23, 
+    fontWeight: 'bold',
+    color: '#0e47e6',
+    textAlign: 'center',
+    paddingTop: 57,
+  },
 });
 
 export default Home;

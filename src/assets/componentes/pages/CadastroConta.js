@@ -6,7 +6,7 @@ import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "fir
 
 
   
-export default function signin( {} ){
+export default function signin( {navigation} ){
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [cell, setCell] = useState('');
@@ -30,13 +30,12 @@ export default function signin( {} ){
   if (user) {
     console.log("logado " +user.uid)
     const uid = user.uid;
-    navigation.navigate("Principal")
+    navigation.navigate("Cadastro")
   } else {
     console.log("nao logado")
   }
   
 });
-
 
 
   return(
@@ -59,12 +58,6 @@ export default function signin( {} ){
        onChangeText = {senha => setSenha(senha)}
        value = {senha}
        />
-
-
-
-
-       <Text style={styles.label}>CPF ou CNPJ</Text>
-       <Text style={styles.cpf} >Tipo cadastro escolhido: {"CPF"}</Text>
        <TextInputMask style={styles.input}
        placeholder={ "CPF"}
        type={'cpf'}
@@ -97,18 +90,17 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0037A8',
     width: '100%',
    },
 
   input:{
-    backgroundColor: '#FFF',
     width: '90%',
+    marginBottom: 2,
     color: '#222',
     fontSize: 17,
-    borderRadius: 7,
-    padding: 8,
-    marginBottom: 15,
+    borderBottomWidth: 1,
+    padding: 10,
+
   },
   cpf:{
     marginBottom: 15,
