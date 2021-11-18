@@ -3,20 +3,39 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, StyleSheet, TouchableOpacity, CheckBox, Image} from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-
+import { Ionicons } from '@expo/vector-icons';
+import { doc, setDoc, getFirestore } from 'firebase/firestore'
 
   
-export default function signin( {} ){
+export default function signin( {navigation} ){
+
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [cell, setCell] = useState('');
   const [cpf, setCpf] = useState('');
+  const [celular, setCelular] = useState('');
+  const [nome, setNome] = useState('');
+  const [ocultarSenha, setOcultarSenha] = useState (true);
+
 
   function signinFirebase(){
+
+    const db = getFirestore();
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, senha)
-      .then((userCredential) => {
-        const user = userCredential.user;
+    createUserWithEmailAndPassword(auth, email, senha, celular, nome, cpf)
+      .then((cred) => {
+        const user = cred.user;
+        console.log(user.uid)
+        console.log(email)
+        console.log(senha)
+        console.log(celular)
+        console.log(nome)
+        console.log(cpf)
+        navigation.navigate("Principal")
+        setDoc(doc(db, "users", user.uid), {
+        Nome: nome,
+        Celular: celular,
+        CPF: cpf, 
+      });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -24,13 +43,14 @@ export default function signin( {} ){
         alert(errorCode, errorMessage);
       });
    }
+   
 
    const auth = getAuth();
    onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("logado " +user.uid)
     const uid = user.uid;
-    navigation.navigate("Principal")
+    navigation.navigate("Cadastro")
   } else {
     console.log("nao logado")
   }
@@ -38,35 +58,41 @@ export default function signin( {} ){
 });
 
 
-
   return(
     <View style={styles.background}>
-
       <View style={styles.containerLogo}>
       <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Yellow_circle_50%25.svg/200px-Yellow_circle_50%25.svg.png'}}
        style={{width: 200, height: 200}} />
       </View> 
       <TextInput style={styles.input} 
        placeholder= {"Nome"}
+       onChangeText = {nome => setNome(nome)}
        />
        <TextInput style={styles.input}
        placeholder="Email"
        onChangeText = {email => setEmail(email)}
        value = {email}
        />
+
+       <View style={styles.areaSenha}>
        <TextInput style={styles.input}
        placeholder="Senha"
        onChangeText = {senha => setSenha(senha)}
        value = {senha}
+       secureTextEntry={ocultarSenha}
        />
+       <TouchableOpacity style={styles.icon} onPress={ () => setOcultarSenha(!ocultarSenha)}>
+        {ocultarSenha ?
+          <Ionicons name="eye" color="#FFF" size={25} />
+          :
+          <Ionicons name="eye-off" color="#FFF" size={25} />
+        }
+       </TouchableOpacity>
 
-
-
-
-       <Text style={styles.label}>CPF ou CNPJ</Text>
-       <Text style={styles.cpf} >Tipo cadastro escolhido: {"CPF"}</Text>
+       </View>
        <TextInputMask style={styles.input}
        placeholder={ "CPF"}
+       onChangeText = {cpf => setCpf(cpf)}
        type={'cpf'}
        value={cpf}
        />
@@ -80,8 +106,8 @@ export default function signin( {} ){
          withDDD:true,
          dddMask: '(99)'
        }}
-       value={cell}
-       onChangeText={ text => setCell(text)}
+       value={celular}
+       onChangeText={ celular => setCelular(celular)}
        />
 
       <TouchableOpacity style={styles.btnSubmit} onPress={()=> {signinFirebase()}}>
@@ -97,25 +123,24 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0037A8',
     width: '100%',
    },
 
   input:{
-    backgroundColor: '#FFF',
     width: '90%',
+    marginBottom: 5,
     color: '#222',
     fontSize: 17,
-    borderRadius: 7,
-    padding: 8,
-    marginBottom: 15,
+    borderBottomWidth: 1,
+    padding: 10,
+
   },
   cpf:{
     marginBottom: 15,
   },
 
   btnSubmit:{
-    backgroundColor: '#09569C',
+    backgroundColor: '#0e47e6',
     width: '50%',
     height: 45,
     alignItems: 'center',
@@ -132,6 +157,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
+  areaSenha:{
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  icon:{
+    width: 40,
+    height: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0e47e6',
+    borderRadius: 7,
+
+  }
 
 
 });

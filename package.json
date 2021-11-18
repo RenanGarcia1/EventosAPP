@@ -22,12 +22,15 @@
     "react-native-elements": "https://github.com/react-native-elements/react-native-elements#dist",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^1.10.3",
-    "react-native-image-slider-box": "^1.1.9",
+    "react-native-image-slider-box": "^1.1.10",
+    "react-native-image-slider-show": "^1.0.3",
     "react-native-masked-text": "^1.13.0",
+    "react-native-paper": "^4.10.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "~3.8.0",
     "react-native-web": "0.17.1",
     "react-slick": "^0.28.1",
+    "simple-carousel-react-native": "^1.0.2",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
