@@ -35,7 +35,9 @@ export default function App({  }){
         name="Principal"
         component={Principal}
         options={{
-          title: 'Voltar ao Login',
+          title: "Iventus", 
+          headerLeft: null, 
+          headerShown: true,
           headerStyle: {
             backgroundColor: '#466bd4',
           },

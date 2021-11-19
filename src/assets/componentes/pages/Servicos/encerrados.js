@@ -6,9 +6,9 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 export default function Encerrados() {
   
   return (
-    <View style = {styles.container}>
-     <Text style={styles.text}>Encerrados</Text>
-    </View>
+    <View elevation={60} style={styles.box2}>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold', color: '#0e47e6'}}>Encerrados</Text>
+      </View> 
   );
 }
 
@@ -21,6 +21,15 @@ const styles = StyleSheet.create({
     text:{
         fontSize: 25,
         fontWeight: 'bold'
+    },
+    box2:{
+      marginLeft: 25,
+      marginRight: 25,
+      height: 500,
+      marginTop: 30,
+      backgroundColor: 'white',
+      borderWidth: 1,
+      borderColor: '#adacac',
     },
 
 })
