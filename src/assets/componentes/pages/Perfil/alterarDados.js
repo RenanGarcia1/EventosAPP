@@ -1,59 +1,127 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity,TextInput, SafeAreaView, Modal, Pressable} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feater from 'react-native-vector-icons/Feather';
-import perfil from './../../../imagens/perfil.png';
+import { doc, setDoc, getFirestore } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
+import { Avatar } from 'react-native-elements';
+import { TextInputMask } from 'react-native-masked-text';
 
 export default function alterarDados() {
-  return (
+
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [celular, setCelular] = useState('');
+  const [Image, setImage] = useState('');
+  const [desc, setDesc] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  function Alterar(){
+    const auth = getAuth();
+    console.log(auth.lastNotifiedUid)
+    const db = getFirestore();
+        setDoc(doc(db, "users", auth.lastNotifiedUid), {
+        Nome: nome,
+        Celular: celular,
+        CPF: cpf, 
+        Image: Image,
+        Descricao: desc
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorCode, errorMessage);
+      });
+   }
+
+  return(
+    
     <SafeAreaView style = {styles.container}>
      <View style={{margin:20}}>
       <View style={{alignItems: 'center'}}>
-          <TouchableOpacity onPress={() =>{}}>
-      <Image
-        style={styles.tinyLogo}
-        source={require('./../../../imagens/perfil.png')}  
-      />
-          </TouchableOpacity>    
+      <TouchableOpacity>
 
+
+      <Avatar 
+      size="xlarge"
+      rounded icon={{ name: 'user', type: 'font-awesome', color: '#0e47e6' }}
+      onPress={() => setModalVisible(true)}
+      source={Image}
+      />
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Digite o link:</Text>
+            <TextInput style={styles.input}
+             placeholder="Link"
+             placeholderTextColor="#666666"
+             onChange = {e => setImage(e.target.value)}
+             />
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.submitText}>Fechar</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      
+
+      </TouchableOpacity>    
       <View style={styles.action}>
       <FontAwesome style = {styles.icons} name="user-o" size={20}/>
       <TextInput
           placeholder="Nome"
           placeholderTextColor="#666666" 
-          autoCorrect={false} 
-          style={styles.textInput}
-          />
-      </View>
-      <View style={styles.action}>
-      <FontAwesome style = {styles.icons} name="envelope" size={20}/>
-      <TextInput
-          placeholder="Email"
-          placeholderTextColor="#666666" 
-          autoCorrect={false} 
+          autoCorrect={false}
+          onChangeText = {nome => setNome(nome)}
           style={styles.textInput}
           />
       </View>
       <View style={styles.action}>
       <FontAwesome style = {styles.icons} name="id-card" size={20}/>
-      <TextInput
-          placeholder="CPF"
-          placeholderTextColor="#666666" 
-          autoCorrect={false} 
-          style={styles.textInput}
-          />
+      <TextInputMask 
+       placeholder={'CPF'}
+       onChangeText = {cpf => setCpf(cpf)}
+       type={'cpf'}
+       value={cpf}
+       />
       </View>
       <View style={styles.action}>
       <FontAwesome style = {styles.icons} name="mobile" size={20}/>
+      <TextInputMask 
+       style={styles.input}
+       type={'cel-phone'}
+       placeholder="(99)99999-9999"
+       options={{
+         maskType: 'BRL',
+         withDDD:true,
+         dddMask: '(99)'
+       }}
+       value={celular}
+       onChangeText={ celular => setCelular(celular)}
+       />
+      </View>
+      <View style={styles.action}>
+      <FontAwesome style = {styles.icons} name="align-justify" size={20}/>
       <TextInput
-          placeholder="Celular"
+          placeholder="Descrição"
           placeholderTextColor="#666666" 
           autoCorrect={false} 
+          onChangeText = {desc => setDesc(desc)}
           style={styles.textInput}
           />
       </View>
-      <TouchableOpacity style={styles.btnSubmit}>
+      <TouchableOpacity style={styles.btnSubmit} onPress={()=> {Alterar()}}>
         <Text style={styles.submitText}>Alterar</Text>
       </TouchableOpacity>
     </View>
@@ -99,5 +167,40 @@ const styles = StyleSheet.create({
    borderRadius: 7,
    marginTop: 40,
  },
+ centeredView: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 22
+},
+modalView: {
+  margin: 20,
+  backgroundColor: "white",
+  borderRadius: 20,
+  padding: 35,
+  alignItems: "center",
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5
+},
+button: {
+  borderRadius: 5,
+  padding: 10,
+  elevation: 2
+},
+buttonClose: {
+  backgroundColor: "#2196F3",
+  height: 40,
+  textAlign: "center",
+},
+modalText: {
+  marginBottom: 15,
+  textAlign: "center",
+}
  
 })

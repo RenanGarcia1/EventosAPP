@@ -1,9 +1,21 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
+import React, {useEffect, useState} from "react";
+import { StyleSheet, Text, View, ScrollView} from "react-native";
 import Slideshow from 'react-native-image-slider-show';
-import foto1 from './../../../imagens/designer.jpg'
+import { getAuth } from "@firebase/auth";
+import { doc, getDoc, getFirestore } from "@firebase/firestore";
 
 const Home = ({}) => {
+  const[nome, setNome] = useState("");
+
+  useEffect(async()=> {
+    const db = getFirestore();
+    const user = getAuth();
+    console.log(user)
+    const document = await getDoc(doc(db, "users", user.lastNotifiedUid))
+    console.log(document.data())
+    setNome(document.data().Nome)
+  })
+
   return (
     <ScrollView>
     <View style={[styles.container, {
@@ -11,7 +23,7 @@ const Home = ({}) => {
     }]}>
       <View style={{ flex: 3, borderColor: '#a6a1a1', }}>
       <View style={{alignItems: 'flex-start'}}>
-      <Text style={{fontSize: 25, fontWeight: 'bold'}}>Bem vindo, "Nome"</Text>
+      <Text style={{fontSize: 25, fontWeight: 'bold'}}>Bem vindo, {nome}</Text>
       </View>
       <View style={{alignItems: 'center', paddingLeft: 20, paddingRight: 20, paddingTop: 20}}>
       <Slideshow 
@@ -85,6 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 17
   }
 
-});
+}
+);
 
 export default Home;

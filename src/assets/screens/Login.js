@@ -84,7 +84,8 @@ function esquecerSenha(){
        value = {email}
        />
 
-       <TextInput style={styles.input}
+       <TextInput secureTextEntry={true} 
+       style={styles.input}
        placeholder="Senha"
        placeholderTextColor="#666666"
        onChangeText = {senha => setSenha(senha)}

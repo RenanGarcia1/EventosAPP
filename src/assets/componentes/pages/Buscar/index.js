@@ -1,20 +1,15 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import React, {useEffect, useState} from "react";
+import { StyleSheet, View, Image, ScrollView } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 
+
+
 const Buscar = () => {
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const onChangeSearch = query => setSearchQuery(query);
 
   return (
     <ScrollView>
     <View style={styles.container}>
-     <Searchbar style={{marginLeft:10, marginRight: 10, marginTop: 10}}
-      placeholder="Procurando algo em especifico?"
-      onChangeText={onChangeSearch}
-      value={searchQuery}
-    />
     <View style={styles.container2}>
       <View style={{ flex: 1}}>
       {/* Primeira Coluna */}

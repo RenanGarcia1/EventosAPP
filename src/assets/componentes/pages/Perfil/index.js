@@ -1,8 +1,10 @@
-import React from 'react';
-import { View, SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native';
-import { Avatar, Title, Caption, Text, TouchableRipple} from 'react-native-paper';
+import React, {useState, useEffect} from 'react';
+import { View, SafeAreaView, StyleSheet} from 'react-native';
+import {Title, Text, TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
-import { getAuth, signOut} from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
+import { getFirestore, getDoc, doc } from '@firebase/firestore';
+import { Avatar } from "react-native-elements";
 
 
 function logoutFirebase(navigation){
@@ -17,26 +19,40 @@ function logoutFirebase(navigation){
 }
 
 export default function Perfil({navigation}) {
+    const [nome, setNome] = useState('');
+    const [Image, setImage] = useState('');
+    const [desc, setDesc] = useState('');
+    useEffect(async()=> {
+      const db = getFirestore();
+      const user = getAuth();
+      console.log(user)
+      const document = await getDoc(doc(db, "users", user.lastNotifiedUid))
+      console.log(document.data())
+      setNome(document.data().Nome)
+      setImage(document.data().Image)
+      setDesc(document.data().Descricao)
+    })
+
   return (
     <SafeAreaView style = {styles.container}>
-       <View style={styles.userInfoSection}>
-         <View style={{flexDirection:'row', marginTop: 15}}>
-           
-           <Avatar.Image style={{marginLeft: 15}}>
-           source={require('./../../../imagens/perfil.png')}  
-             size={100}
-           </Avatar.Image>
+       <View style={styles.userInfoSection}>  
+       <View style={{flexDirection:'row', marginTop: 15, marginLeft: 15}}>  
+         
+         <Avatar
+          rounded
+          size="large"
+          source={{uri: Image}}
+         />
 
            <View style={{marginLeft: 20}}>
-              <Title style={styles.title, { marginTop: 20, fontSize: 25, fontWeight: 'bold' }}>Renan Garcia</Title>
+              <Title style={styles.title, { marginTop: 20, fontSize: 25, fontWeight: 'bold' }}>{nome}</Title>
            </View>
          </View>
        </View>
 
        <View style={styles.infoBoxWrapper}>
         <View style={styles.infoBox}>
-        <Title>XXX</Title>
-        <Caption>xxx</Caption>
+        <Title>{desc}</Title>
         </View>
         </View>
 

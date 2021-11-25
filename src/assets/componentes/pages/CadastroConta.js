@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Text, View, TextInput, StyleSheet, TouchableOpacity, CheckBox, Image} from 'react-native';
+import { Text, View, TextInput, StyleSheet, TouchableOpacity, Picker, Image} from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { Ionicons } from '@expo/vector-icons';
@@ -15,7 +15,7 @@ export default function signin( {navigation} ){
   const [celular, setCelular] = useState('');
   const [nome, setNome] = useState('');
   const [ocultarSenha, setOcultarSenha] = useState (true);
-
+  const [selectedValue, setSelectedValue] = useState("cpf");
 
   function signinFirebase(){
 
@@ -63,7 +63,17 @@ export default function signin( {navigation} ){
       <View style={styles.containerLogo}>
       <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Yellow_circle_50%25.svg/200px-Yellow_circle_50%25.svg.png'}}
        style={{width: 200, height: 200}} />
-      </View> 
+      </View>
+
+      <Picker
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150, marginTop: -30 }}
+        onValueChange={(itemValue) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="Pessoa Física" value='cpf' />
+        <Picker.Item label="Pessoa Jurídica" value='cnpj' />
+      </Picker>
+
       <TextInput style={styles.input} 
        placeholder= {"Nome"}
        onChangeText = {nome => setNome(nome)}
@@ -88,15 +98,13 @@ export default function signin( {navigation} ){
           <Ionicons name="eye-off" color="#FFF" size={25} />
         }
        </TouchableOpacity>
-
        </View>
        <TextInputMask style={styles.input}
-       placeholder={ "CPF"}
+       placeholder={'CPF'}
        onChangeText = {cpf => setCpf(cpf)}
        type={'cpf'}
        value={cpf}
        />
-
        <TextInputMask 
        style={styles.input}
        type={'cel-phone'}
@@ -155,7 +163,6 @@ const styles = StyleSheet.create({
   containerLogo:{
     marginBottom: 50,
     justifyContent: 'center',
-
   },
   areaSenha:{
     width: '90%',
@@ -169,7 +176,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#0e47e6',
     borderRadius: 7,
-
+  },
+  checkboxContainer:{
   }
 
 
