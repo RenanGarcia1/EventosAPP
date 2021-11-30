@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { StyleSheet, View, Image, ScrollView } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Searchbar } from 'react-native-paper';
 
 
 
@@ -13,27 +12,37 @@ const Buscar = ({navigation}) => {
     <View style={styles.container2}>
       <View style={{ flex: 1}}>
       {/* Primeira Coluna */}
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Programador'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/cozinheiro.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Jardineiro'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/jardineiro.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Fotografo'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/fotografia.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Encanador'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/encanador.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Designer'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/designer.jpg')}
       />
@@ -42,27 +51,37 @@ const Buscar = ({navigation}) => {
       </View>
       <View style={{ flex: 1}}>
       {/* Segunda Coluna */}
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Eletricista'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/eletricista.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Pedreiro'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/pedreiro.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Editor'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/editor.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Produtor'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/producer.jpg')}
       />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=> navigation.navigate('ServicosBusca')}>
+      <TouchableOpacity onPress={()=> navigation.push('ServicosBusca',{
+         Categoria: 'Nutricionista'
+      })}>
       <Image style={styles.imagens}
        source={require('./../../../imagens/nutricionista.jpg')}
       />

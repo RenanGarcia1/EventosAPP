@@ -44,7 +44,7 @@ const meusServicos = ({navigation}) => {
               <Text style={styles.NomeSer}> {item.NomeServico} </Text>
               <Text style={styles.Preco}>Preço: {item.Preco} </Text>
               <Text style={styles.categoria}>Categoria: {item.Categoria} </Text>
-              <TouchableOpacity onPress={()=> navigation.navigate('Alterar Dados Servicos')}>
+              <TouchableOpacity onPress={()=> navigation.push('Alterar Dados Servicos',{id: item.id})}>
               <Icon name="edit" color="#0e47e6" size={25}/>
               </TouchableOpacity>
               </View>

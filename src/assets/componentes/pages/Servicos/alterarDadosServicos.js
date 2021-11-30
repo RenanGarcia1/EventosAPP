@@ -6,81 +6,46 @@ import firebase from './../../../../../firebaseConfig';
 import { getAuth } from "firebase/auth";
 import { Avatar } from 'react-native-elements';
 
-export default function alterarDadosServicos() {
+export default function alterarDadosServicos({route}) {
 
-  const [nomeS, setNomeS] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [preco, setPreco] = useState('');
-  const [ImageS, setImageS] = useState('');
+
+  const {id} = route.params
+  const [NomeServico, setNomeServico] = useState('');
+  const [Categoria, setCategoria] = useState('');
+  const [Descricao, setDescricao] = useState('');
+  const [Preco, setPreco] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
 
-  function cadastroServico(){
-  
+  function Alterar(){
     const auth = getAuth();
     console.log(auth.lastNotifiedUid)
     const db = getFirestore();
-      setDoc(doc(db, "services", `${Date.now()} ${Math.random()}`), {
-        NomeServico: nomeS,
-        Descricao: descricao,
-        Preco: preco, 
-        Imagem: ImageS,
+    const user = getAuth();
+        setDoc(doc(db, "services", id), {
+        NomeServico: NomeServico,
         Categoria: selectedValue,
-        Usuario: auth.lastNotifiedUid
+        Descricao: Descricao,
+        Preco: Preco,
+        Usuario: user.lastNotifiedUid,
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorCode, errorMessage);
-      });  
-  }
-
-    const alterarImagem=() =>{
-    console.log(ImageS)
+      });
    }
 
   return (
     <SafeAreaView style = {styles.container}>
      <View style={{margin:20}}>
       <View style={{alignItems: 'center'}}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Link:</Text>
-            <TextInput style={styles.input}
-             placeholder="Link"
-             placeholderTextColor="#666666"
-             onChange = {e => setImageS(e.target.value)}
-             />
-            <Pressable
-              style={[styles.button, styles.buttonClose, {marginBottom:15 }]}
-              onPress={alterarImagem}
-            >
-            <Text style={styles.submitText} > Enviar </Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.submitText}>Fechar</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>  
+  
       <View style={styles.action}>
       <FontAwesome style = {styles.icons} name="tag" size={20}/>
       <TextInput
           placeholder="Nome do Serviço"
           placeholderTextColor="#666666" 
-          onChangeText = {nomeS => setNomeS(nomeS)}
+          onChangeText = {NomeServico => setNomeServico(NomeServico)}
           autoCorrect={false} 
           style={styles.textInput}
           />
@@ -91,7 +56,7 @@ export default function alterarDadosServicos() {
           placeholder="Descrição"
           placeholderTextColor="#666666" 
           autoCorrect={false} 
-          onChangeText = {descricao => setDescricao(descricao)}
+          onChangeText = {Descricao => setDescricao(Descricao)}
           style={styles.textInput}
           />
       </View>
@@ -101,7 +66,7 @@ export default function alterarDadosServicos() {
           placeholder="Preco"
           placeholderTextColor="#666666" 
           autoCorrect={false} 
-          onChangeText = {preco => setPreco(preco)}
+          onChangeText = {Preco => setPreco(Preco)}
           style={styles.textInput}
           />
       </View>
@@ -127,7 +92,7 @@ export default function alterarDadosServicos() {
 
       </Picker>
       </View>
-      <TouchableOpacity style={styles.btnSubmit} onPress={async ()=> cadastroServico()}>
+      <TouchableOpacity style={styles.btnSubmit} onPress={async ()=> Alterar()}>
         <Text style={styles.submitText}>Alterar Dados</Text>
       </TouchableOpacity>
     </View>
