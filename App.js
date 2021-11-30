@@ -14,7 +14,9 @@ import Encerrados from './src/assets/componentes/pages/Servicos/encerrados';
 import MeusServiços from './src/assets/componentes/pages/Servicos/meusServicos';
 import CadastrarServiço from './src/assets/componentes/pages/Servicos/cadastrarServico';
 import Buscar from './src/assets/componentes/pages/Buscar/index';
-
+import AlterarDadosServicos from './src/assets/componentes/pages/Servicos/alterarDadosServicos';
+import Propostas from './src/assets/componentes/pages/Servicos/propostas';
+import ServicosBusca from './src/assets/componentes/pages/Servicos/servicosBusca';
 
 const Stack = createStackNavigator();
 
@@ -124,6 +126,39 @@ export default function App({  }){
         <Stack.Screen 
         name="Buscar"
         component={Buscar}
+        />
+        <Stack.Screen 
+        name="Alterar Dados Servicos"
+        component={AlterarDadosServicos}
+        options={{
+          title: 'Voltar aos Serviços',
+          headerStyle: {
+            backgroundColor: '#466bd4',
+          },
+          headerTintColor: '#fff',
+        }}
+        />
+        <Stack.Screen 
+        name="Propostas"
+        component={Propostas}
+        options={{
+          title: 'Voltar aos Serviços',
+          headerStyle: {
+            backgroundColor: '#466bd4',
+          },
+          headerTintColor: '#fff',
+        }}
+        />
+        <Stack.Screen 
+        name="ServicosBusca"
+        component={ServicosBusca}
+        options={{
+          title: 'Voltar aos Serviços',
+          headerStyle: {
+            backgroundColor: '#466bd4',
+          },
+          headerTintColor: '#fff',
+        }}
         />
 
        </Stack.Navigator>

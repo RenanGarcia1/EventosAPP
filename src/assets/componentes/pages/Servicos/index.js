@@ -16,6 +16,9 @@ export default function Notification({navigation}) {
       <TouchableOpacity style={styles.btnSubmit3} onPress={()=> navigation.navigate('Encerrados')}>
         <Text style={styles.submitText}>Encerrados</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.btnSubmit4} onPress={()=> navigation.navigate('Propostas')}>
+        <Text style={styles.submitText}>Minhas propostas</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -50,6 +53,15 @@ const styles = StyleSheet.create({
     },
     btnSubmit3:{
       backgroundColor: '#eb7610',
+      width: '50%',
+      height: 45,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 7,
+      marginTop: 40,
+    },
+    btnSubmit4:{
+      backgroundColor: '#f7e454',
       width: '50%',
       height: 45,
       alignItems: 'center',

@@ -6,7 +6,7 @@ import firebase from './../../../../../firebaseConfig';
 import { getAuth } from "firebase/auth";
 import { Avatar } from 'react-native-elements';
 
-export default function cadastrarServico() {
+export default function alterarDadosServicos() {
 
   const [nomeS, setNomeS] = useState('');
   const [descricao, setDescricao] = useState('');
@@ -128,7 +128,7 @@ export default function cadastrarServico() {
       </Picker>
       </View>
       <TouchableOpacity style={styles.btnSubmit} onPress={async ()=> cadastroServico()}>
-        <Text style={styles.submitText}>Cadastrar Serviço</Text>
+        <Text style={styles.submitText}>Alterar Dados</Text>
       </TouchableOpacity>
     </View>
     </View>
