@@ -21,7 +21,9 @@ function logoutFirebase(navigation){
 export default function Perfil({navigation}) {
     const [nome, setNome] = useState('');
     const [Image, setImage] = useState('');
-    const [desc, setDesc] = useState('');
+    const [cpf, setCPF] = useState('');
+    const [celular, setCelular] = useState('');
+
     useEffect(async()=> {
       const db = getFirestore();
       const user = getAuth();
@@ -30,7 +32,9 @@ export default function Perfil({navigation}) {
       console.log(document.data())
       setNome(document.data().Nome)
       setImage(document.data().Image)
-      setDesc(document.data().Descricao)
+      setCPF(document.data().CPF)
+      setCelular(document.data().Celular)
+
 
     })
 
@@ -53,19 +57,13 @@ export default function Perfil({navigation}) {
 
        <View style={styles.infoBoxWrapper}>
         <View style={styles.infoBox}>
-         {/* <Title>{nota}</Title>  */}
+         <Text> CPF: {cpf}</Text>
+         <Text> Telefone: {celular}</Text>
         </View>
         </View>
 
 
        <View style={styles.menuWrapper}>
-
-         <TouchableRipple onPress={()=> navigation.navigate('Favoritos')}>
-            <View style={styles.menuItem}>
-              <Icon name="heart" color="#0e47e6" size={25}/>
-              <Text style={styles.menuText}>Seus Favoritos</Text>
-            </View>
-         </TouchableRipple>
 
          <TouchableRipple onPress={()=> navigation.navigate('Configurações')}>
             <View style={styles.menuItem}>

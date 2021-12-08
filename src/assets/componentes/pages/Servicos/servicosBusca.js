@@ -50,9 +50,6 @@ export default function servicosBusca({route, navigation}) {
               <TouchableOpacity onPress={()=> navigation.push('Formulario',{item})}>
               <Icon style={styles.icon} name="message-square" color="#0e47e6" size={25}/>
               </TouchableOpacity>
-              <TouchableOpacity>
-              <Icon style={styles.icon} name="heart" color="red" size={25}/>
-              </TouchableOpacity>
               </View>
               </View>
           }

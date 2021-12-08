@@ -6,7 +6,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from './src/assets/componentes/pages/Login';
 import Cadastro from './src/assets/componentes/pages/CadastroConta';
 import Principal from './src/assets/componentes/pages/TelaPrincipal';
-import Favoritos from './src/assets/componentes/pages/Perfil/favoritos';
 import AlterarDados from './src/assets/componentes/pages/Perfil/alterarDados';
 import Configurações from './src/assets/componentes/pages/Perfil/configuracoes';
 import Andamento from './src/assets/componentes/pages/Servicos/emAndamento';
@@ -58,17 +57,6 @@ export default function App({  }){
           title: "Iventus", 
           headerLeft: null, 
           headerShown: true,
-          headerStyle: {
-            backgroundColor: '#466bd4',
-          },
-          headerTintColor: '#fff',
-        }}
-        />
-        <Stack.Screen 
-        name="Favoritos"
-        component={Favoritos}
-                options={{
-          title: 'Voltar ao Perfil',
           headerStyle: {
             backgroundColor: '#466bd4',
           },

@@ -59,7 +59,7 @@ export default function propostas() {
 
   return (
       <View elevation={60} style={styles.box2}>
-      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold', color: '#0e47e6'}}>Propostas</Text>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Propostas</Text>
       {propostas&&
       <FlatList
           data = {propostas}
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     box2:{
       marginLeft: 25,
       marginRight: 25,
-      height: 500,
+      height: 625,
       marginTop: 30,
       backgroundColor: 'white',
       borderWidth: 1,

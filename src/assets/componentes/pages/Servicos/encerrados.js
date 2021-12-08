@@ -51,10 +51,9 @@ export default function Encerrados() {
 
   return (
     <View elevation={60} style={styles.box2}>
-      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold', color: '#0e47e6'}}>Encerrados</Text>
       {servicosDestinatario&&
       <>
-      <Text>Destinatarios Encerrados</Text>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Destinatarios Encerrados</Text>
       <FlatList
           data = {servicosDestinatario}
           renderItem={({item})=>{
@@ -77,7 +76,7 @@ export default function Encerrados() {
 
    {servicosRemetente&&
       <>
-      <Text>Remetentes Encerrados</Text>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Remetentes Encerrados</Text>
       <FlatList
           data = {servicosRemetente}
           renderItem={({item})=>{
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     box2:{
       marginLeft: 25,
       marginRight: 25,
-      height: 500,
+      height: 625,
       marginTop: 30,
       backgroundColor: 'white',
       borderWidth: 1,
@@ -133,4 +132,13 @@ const styles = StyleSheet.create({
        marginLeft: 7,
        marginBottom: 2
      },
+     info:{
+      borderWidth: 1,
+      marginBottom: 5,
+      marginLeft: 5,
+      marginRight: 5,
+      marginTop: 5,
+      borderColor: '#adacac',
+      backgroundColor: '#dfe9f5'
+    },
 })

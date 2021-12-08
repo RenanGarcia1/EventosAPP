@@ -59,11 +59,9 @@ export default function emAndamento() {
 
   return (
       <View elevation={60} style={styles.box2}>
-      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold', color: '#0e47e6'}}>Em Andamento</Text>
-
       {servicosDestinatario&&
       <>
-      <Text style={{marginLeft: 5, }}>Meus Serviços em andamento</Text>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Meus Serviços em andamento</Text>
       <FlatList
           data = {servicosDestinatario}
           renderItem={({item})=>{
@@ -92,7 +90,7 @@ export default function emAndamento() {
 
        {servicosRemetente&&
       <>
-      <Text styles={{marginLeft: 5, }}>Meus serviços contratados em andamento</Text>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Meus serviços contratados em andamento</Text>
       <FlatList
           data = {servicosRemetente}
           renderItem={({item})=>{
@@ -136,7 +134,7 @@ const styles = StyleSheet.create({
     box2:{
       marginLeft: 25,
       marginRight: 25,
-      height: 500,
+      height: 625,
       marginTop: 30,
       backgroundColor: 'white',
       borderWidth: 1,

@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
-import { StyleSheet, Text, View, ScrollView} from "react-native";
+import { TouchableOpacity, FlatList, TextInput, StyleSheet, Text, View, ScrollView} from "react-native";
 import Slideshow from 'react-native-image-slider-show';
 import { limit, doc, getFirestore, getDoc, getDocs, collection, query, where, setDoc,updateDoc} from 'firebase/firestore';
 import { getAuth } from "firebase/auth";
+import Icon from 'react-native-vector-icons/Feather';
 
 const Home = ({}) => {
   const[nome, setNome] = useState("");
@@ -76,10 +77,30 @@ const Home = ({}) => {
        </View>
       </View>
       <View elevation={60} style={styles.box2}>
-      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold', color: '#0e47e6'}}>Sugestões</Text>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Sugestões</Text>
       </View> 
       <View elevation={60} style={styles.box2}>
-      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold', color: '#0e47e6'}}>Novidades</Text>
+      <Text style={{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Novidades</Text>
+      {novidades&&
+      <>
+      <FlatList
+          data = {novidades}
+          renderItem={({item})=>{
+            console.log(Object.keys(item))
+            console.log(item)
+            return(
+              <View style={styles.info} key={item.id} >
+                <Text style={styles.NomeSer}> {item.NomeServico}</Text>
+                <Text style={styles.text2}> Descrição: { item.Descricao} </Text>
+                <Text style={styles.text2}> Categoria: { item.Categoria} </Text>
+                <Text style={styles.text2}> Preço médio: { item.Preco} </Text>
+              </View>
+            )
+          }
+          }
+        />
+        </>
+        }
       </View>
     </View>
     </ScrollView>
@@ -114,7 +135,24 @@ const styles = StyleSheet.create({
   caption:{
     color:'white',
     fontSize: 17
-  }
+  },
+  info:{
+    borderWidth: 1,
+    marginBottom: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 7,
+    borderColor: '#adacac',
+    backgroundColor: '#f0f3ff'
+  },
+  
+  NomeSer:{
+  
+   fontSize:20,
+   color: '#466bd4',
+   marginBottom: 2,
+   fontWeight: 'bold',
+  },
 
 }
 );
