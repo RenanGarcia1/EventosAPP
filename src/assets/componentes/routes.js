@@ -4,10 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './pages/Home';
 import Perfil from './pages/Perfil';
 import Buscar from './pages/Buscar';
-import Servicos from './pages/Servicos';
+import Serviços from './pages/Servicos';
 
-import { Entypo, Feather } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Feather} from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +18,7 @@ export default function Routes(){
                 backgroundColor: '#1F282F',
                 borderTopColor: 'transparent'
             },
-            activeTintColor: '#FFFFFF',
+            tabBarActiveTintColor: '#0e47e6',
             tabStyle: {
                 tabStyle:{
                     paddingBottom:5,
@@ -28,7 +27,7 @@ export default function Routes(){
             }
         }}
         >
-       <Tab.Screen
+       <Tab.Screen 
         name="Home"
         component={Home}
         options={{
@@ -49,8 +48,8 @@ export default function Routes(){
         }}
       />
       <Tab.Screen
-        name="Servicos"
-        component={Servicos}
+        name="Serviços"
+        component={Serviços}
         options={{
           tabBarLabel: 'Servicos',
           tabBarIcon: ({ color, size }) => (
